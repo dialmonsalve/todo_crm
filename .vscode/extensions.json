@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries",
+    "streetsidesoftware.code-spell-checker-spanish",
+    "yoavbls.pretty-ts-errors",
+    "ms-vscode.vscode-typescript-next",
+    "astro-build.astro-vscode"
+  ],
+  "unwantedRecommendations": []
+}

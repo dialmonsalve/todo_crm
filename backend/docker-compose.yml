@@ -1,0 +1,36 @@
+services:
+
+  db:
+    container_name: postgresql
+    image: postgres:17.2-bookworm
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    restart: always
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+    networks:
+      - todo
+    ports:
+      - 5432:5432
+
+  adminer:
+    depends_on:
+      - db
+    image: adminer:4.8.1-standalone
+    container_name: adminer-dialmonsalve
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - todo
+
+networks:
+  todo:
+    driver: bridge
+
+volumes:
+  todo-vol:
+    external: false
+    driver: local

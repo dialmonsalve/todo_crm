@@ -1,0 +1,7 @@
+{
+  "INVALID_SORT_FIELD": "Campos válidos para ordenar '[{validFields}]'",
+  "INVALID_SORT_ORDER": "Solo se puede ordenar de manera '[asc o desc]' ",
+  "NOT_VALID_CONFIG": "Configuración no válida",
+  "INVALID_ENTITY_TYPE": "El tipo de entidad es inválido, solo se permite: {entity}",
+  "INVALID_ENUM_ARRAY": "Cada valor debe ser uno de: {args.validTypes}"
+}

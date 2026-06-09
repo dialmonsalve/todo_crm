@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'svg'> {
+  name: string; // El nombre del archivo SVG (sin extensión)
+  fallback?: string; // Texto por defecto si no existe el icono
+}
+
+const { name, fallback = 'SVG no existe', ...rest } = Astro.props;
+
+let IconComponent: any = null;
+
+try {
+  const normalized = name.replace(/[^a-zA-Z0-9-]/g, '');
+  IconComponent = await import(`./${normalized}.svg?raw`);
+} catch (e) {
+  console.warn(`Icon "${name}" not found in src/icons`);
+}
+
+---
+
+{IconComponent ? (
+  <div
+    {...rest}
+    set:html={IconComponent.default}
+  />
+) : (
+  <div class="text-gray-500 italic" {...rest}>
+    {fallback}
+  </div>
+)}

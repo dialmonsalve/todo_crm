@@ -1,0 +1,15 @@
+{
+  "PROFILE_REQUIRED": "profile is requerid",
+  "PROFILE_EMPTY": "profile must be a non-empty object",
+  "NAME_STRING": "Name must be a string.",
+  "NAME_SHORT": "Name is too short. Minimum {constraints.0} characters.",
+  "NAME_LONG": "Name must have between 3 and {constraints.0} characters.",
+  "LAST_NAME_STRING": "Last name must be a string.",
+  "LAST_NAME_SHORT": "Last name is too short. Minimum {constraints.0} characters.",
+  "LAST_NAME_LONG": "Last name is too long. Maximum {constraints.0} characters.",
+  "PHONE_STRING": "Phone must be a string.",
+  "PHONE_SHORT": "Phone must have at least {constraints.0} digits.",
+  "ADDRESS_STRING": "Address must be a string.",
+  "ADDRESS_LONG": "Address is too long. Maximum {constraints.0} characters.",
+  "AVATAR_STRING": "Avatar must be a string (URL or filename)."
+}

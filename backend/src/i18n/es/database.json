@@ -1,0 +1,15 @@
+{
+  "VALUE_TOO_LONG": "El valor para '{target}' es demasiado largo para el almacenamiento.",
+  "NULL_VIOLATION": "El campo '{target}' no puede estar vacío.",
+  "RELATION_CONSTRAINT": "No se puede eliminar o cambiar el {field} porque otros registros dependen de él.",
+  "UNKNOWN_ERROR": "Ocurrió un error inesperado en la base de datos.",
+  "UNIQUE_CONSTRAINT": "El valor para el campo '{target}' ya está en uso.",
+  "FOREIGN_KEY_FAIL": "No se puede completar la operación: El {field} proporcionado no existe en el sistema.",
+  "NOT_FOUND": "El registro solicitado no fue encontrado en nuestra base de datos.",
+  "CONNECTION_ERROR": "Error de conexión con el servidor de base de datos.",
+  "fields": {
+    "username": "nombre de usuario",
+    "email": "correo electrónico",
+    "roleId": "rol"
+  }
+}

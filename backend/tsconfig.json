@@ -1,0 +1,31 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "incremental": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "declaration": false,
+    "removeComments": true,
+    "types": ["node"],
+    "paths": {
+      "*": ["./*"],
+      "@auth/*": ["./src/auth/*"],
+      "@aDecorators/*": ["./src/auth/decorators/*"],
+      "@cFilters/*": ["./src/common/filters/*"],
+      "@cDatabase/*": ["./src/common/database/*"],
+      "@cDto/*": ["./src/common/dto/*"],
+      "@cPaginate/*": ["./src/common/paginate/*"],
+      "@cServices/*": ["./src/common/services/*"],
+      "@cInterfaces/*": ["./src/common/interfaces/*"],
+      "@config/*": ["./src/config/*"],
+      "@profiles/*": ["./src/profiles/*"],
+      "@users/*": ["./src/users/*"],
+      "@prisma/client": ["./src/common/database/generated/prisma"],
+      "@generated-prisma/*": ["./src/common/database/generated/prisma/*"]
+    }
+  },
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+}

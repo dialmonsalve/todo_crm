@@ -1,0 +1,29 @@
+---
+import Icon from "@/icons/Icon.astro";
+
+interface Props {
+  hasChildren: boolean;
+  name: string;
+}
+
+const { hasChildren, name } = Astro.props;
+---
+
+<button
+  class:list={[
+    "accordion-header flex w-full justify-between cursor-pointer hover:bg-blue-400 hover:text-gray-100 transition-colors p-2",
+  ]}
+>
+  <span class="flex gap-1">
+    {name}
+  </span>
+  {
+    hasChildren && (
+      <Icon
+        name="arrow-down"
+        class="w-6 transition-transform  hover:text-bar-wine-dark"
+        id="arrow-down"
+      />
+    )
+  }
+</button>

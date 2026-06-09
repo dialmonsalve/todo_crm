@@ -1,0 +1,18 @@
+---
+import LINKS from "@/constants/adminLinks";
+import NavLink from "./NavLink.astro"
+---
+
+<dial-accordion>
+  <ul class="text-sm flex flex-col text-brand-100 dark:text-gray-300 pb-2">
+    {LINKS.map((link) => <NavLink link={link} />)}
+  </ul>
+</dial-accordion>
+
+<style>
+  nav {
+    scrollbar-width: thin;
+    scrollbar-color: #00aeee white;
+  }
+</style>
+<script src="@/web-components/accordion"></script>

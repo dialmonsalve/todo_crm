@@ -1,0 +1,20 @@
+{
+  "PASSWORD_WEAK": "La contraseña debe tener al menos 3 letras (una mayúscula), 3 números y 1 carácter especial",
+  "PASSWORD_STRING": "La contraseña debe ser una cadena de texto válida",
+  "USERNAME_LONGER": "El nombre de usuario debe tener al menos {constraints.0} caracteres",
+  "USERNAME_STRING": "El nombre de usuario debe ser uba cadena de texto válida",
+  "EMAIL": "El correo electrónico no es válido",
+  "ROLE_STRING": "El role es obligatorio",
+  "ROLE_INVALID": "El role es inválido",
+  "STATUS": "El estado debe ser uno de los siguientes valores: ACTIVE, INACTIVE, SUSPENDED",
+  "PROFILE_REQUIRED": "El perfil es requerido",
+  "PROFILE_EMPTY": "El perfil no puede estar vacío",
+  "USERNAME_NON_WHITE_SPACE": "No se permiten espacios en blanco en el nombre de usuario",
+  "CREATED": "El usuario '{name}' ha sido creado exitosamente",
+  "UPDATED": "El usuario '{name}' ha sido actualizado exitosamente",
+  "ACTIVATED": "El usuario '{name}' ha sido activado exitosamente",
+  "DEACTIVATED": "El usuario '{name}' ha sido desactivado exitosamente",
+  "USER_INVALID": "Uno de los ids no es válido",
+  "PERMISSIONS_ARRAY": "Los permisos deben ser un array",
+  "PERMISSIONS_INT": "Permissions must be a numbers array"
+}

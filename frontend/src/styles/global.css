@@ -1,0 +1,199 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark,
+    cupcake,
+    retro,
+    valentine,
+    luxury,
+    forest,
+    garden;
+}
+
+@theme {
+  /* Colores principales */
+  --color-bar-black: #111111;
+  --color-bar-dark: #1e1e1e;
+  --color-bar-darker: #0f0f0f;
+
+  /* Colores de bebidas y ambiente */
+  --color-bar-wine: #722f37;
+  --color-bar-wine-light: #a2423d;
+  --color-bar-wine-dark: #5a232a;
+
+  --color-bar-gold: #d4af37;
+  --color-bar-gold-light: #e6c555;
+  --color-bar-gold-dark: #b8860b;
+
+  --color-bar-amber: #f59e0b;
+  --color-bar-copper: #b87333;
+
+  /* Neutros */
+  --color-bar-gray: #e5e7eb;
+  --color-bar-light-gray: #f3f4f6;
+  --color-bar-off-white: #f9fafb;
+
+  --color-bar-steel: #4b5563;
+  --color-bar-steel-light: #9ca3af;
+  --color-bar-steel-dark: #374151;
+
+  /* Acciones */
+  --color-bar-green: #10b981;
+  --color-bar-green-dark: #059669;
+  --color-bar-red: #ef4444;
+  --color-bar-red-light: #fca5a5;
+
+  /* Fondo por defecto
+  --color-bg-primary: var(--color-bar-black);
+  --color-bg-secondary: var(--color-bar-dark);
+  --color-bg-card: var(--color-bar-darker); */
+
+  /* Texto */
+  --color-text-primary: var(--color-bar-off-white);
+  --color-text-secondary: var(--color-bar-gray);
+  --color-text-accent: var(--color-bar-gold);
+
+  /* Botones */
+  --color-btn-primary: var(--color-bar-wine);
+  --color-btn-primary-hover: var(--color-bar-wine-dark);
+  --color-btn-accent: var(--color-bar-gold);
+  --color-btn-accent-hover: var(--color-bar-gold-dark);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-heading: "Playfair Display", serif;
+}
+
+/* Utilidades personalizadas */
+
+@utility bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+@utility bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+@utility text-accent {
+  color: var(--color-text-accent);
+}
+
+@utility text-muted {
+  color: var(--color-text-secondary);
+}
+
+@utility btn-primary {
+  background-color: var(--color-btn-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-btn-primary-hover);
+  }
+}
+
+@utility btn-accent {
+  background-color: var(--color-btn-accent);
+  color: var(--color-bar-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-btn-accent-hover);
+  }
+}
+
+/* Opcional: Estilos base */
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: system-ui, sans-serif;
+}
+
+
+@keyframes alertFade {
+  0% {
+    transform: translateX(50%);
+  }
+
+  10% {
+    transform: translateX(-100%);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-alert {
+  animation: alertFade 3s forwards;
+}
+
+@keyframes slideOutLeft {
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleOut {
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+.spinOut {
+  animation: spinOut 300 ease-in-out ;
+}
+
+@keyframes spinOut {
+  to {
+    transform: rotate(90deg) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.show-modal {
+  transition: opacity 0.25s ease-in-out, display 0.25s ease-in-out;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.hide-modal {
+  opacity: 0;
+  pointer-events: none;
+  color: #ffc9c9;
+}

@@ -1,0 +1,10 @@
+---
+import DashboardDashboardMain from "../components/Dashboard.vue";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout>
+  <button class="btn-primary">hello</button>
+  <button class="btn-accent">Hello 2</button>
+  <DashboardDashboardMain client:only />
+</MainLayout>

@@ -1,0 +1,59 @@
+---
+interface Props {
+  items: Items[];
+  title: string;
+  className: string;
+}
+
+interface Items {
+  label: string;
+  id: number;
+}
+
+const { items, title } = Astro.props;
+---
+
+<tabs-dial>
+  <h2 class="dark:text-gray-200">{title}</h2>
+  <div class:list={[`tabs flex gap-1`]}>
+    {
+      items.map(({ label, id }) => (
+        <button
+          class:list={[
+            "bg-slate-800 p-2 rounded-sm shadow-2xl text-xs dark:text-gray-400 cursor-pointer text-white",
+          ]}
+          data-tab={`tab-${id}`}
+          type="button"
+        >
+          {label}
+        </button>
+      ))
+    }
+  </div>
+
+  <slot />
+</tabs-dial>
+
+<style is:global>
+  .tab-content {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .tabs button.active {
+    background-color: #722f37;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.313) inset;
+    &:hover {
+      background-color: #a2423d;
+    }
+  }
+</style>
+
+<script src="@/web-components/tab"></script>

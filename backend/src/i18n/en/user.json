@@ -1,0 +1,19 @@
+{
+  "PASSWORD_WEAK": "The password must contain at least 3 letters (one uppercase), 3 numbers, and 1 special character.",
+  "PASSWORD_STRING": "password must be a string.",
+  "PASSWORD_SHORTER": "The password must be at least {constraints.0} characters long",
+  "USERNAME_LONGER": "username must be longer than or equal to {constraints.0} characters.",
+  "USERNAME_STRING": "username must be a string.",
+  "EMAIL": "The field email is not a valid email.",
+  "STATUS": "status must be one of the following values: ACTIVE, INACTIVE, SUSPENDED.",
+  "PROFILE_REQUIRED": "profile is requerid.",
+  "PROFILE_EMPTY": "profile must be a non-empty object.",
+  "USERNAME_NON_WHITE_SPACE": "No spaces are allowed in the username.",
+  "CREATED": "User '{name}' has been created successfully",
+  "UPDATED": "User '{name}' has been updated successfully",
+  "ACTIVATED": "User '{name}' has been activated successfully",
+  "DEACTIVATED": "User '{name}' has been deactivated successfully",
+  "USER_INVALID": "One of the ids is invalid",
+  "PERMISSIONS_ARRAY": "Permissions must be an array",
+  "PERMISSIONS_INT": "Permissions must be a numbers array"
+}

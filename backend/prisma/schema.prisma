@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/common/database/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                    String              @id @default(uuid()) @db.Uuid
+  email                 String              @unique
+  username              String              @unique
+  password              String              @db.VarChar(100)
+  isActive              Boolean             @default(true)
+  requirePasswordChange Boolean             @default(false)
+  tokenVersion          Int                 @default(1)
+  twoFactorSecret       String?
+  isTwoFactorEnabled    Boolean             @default(false)
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  createdById           String?             @db.Uuid
+  createdBy             User?               @relation("UserCreated", fields: [createdById], references: [id])
+  updatedById           String?             @db.Uuid
+  updatedBy             User?               @relation("UserUpdated", fields: [updatedById], references: [id])
+  role                  Role                @default(EMPLOYEE)
+  profile               Profile?
+  createdTasks          Task[]              @relation("TaskCreator")
+  assignedTasks         Task[]              @relation("TaskAssignee")
+  assignedProjects      ProjectAssignment[]
+  usersCreated          User[]              @relation("UserCreated")
+  usersUpdated          User[]              @relation("UserUpdated")
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(50)
+  lastName  String   @db.VarChar(60)
+  address   String?  @db.VarChar(50)
+  phone     String?  @db.VarChar(16)
+  avatar    String?  @db.VarChar(50)
+  userId    String   @unique @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  updatedAt DateTime @updatedAt
+}
+
+model Customer {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(150)
+  company   String?   @db.VarChar(150)
+  email     String    @unique
+  phone     String?
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
+}
+
+model Project {
+  id          Int                 @id @default(autoincrement())
+  name        String              @db.VarChar(150)
+  description String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  clientId    Int
+  client      Customer            @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  tasks       Task[]
+  team        ProjectAssignment[]
+}
+
+model ProjectAssignment {
+  projectId  Int
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId     String   @db.Uuid
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignedAt DateTime @default(now())
+
+  @@id([projectId, userId])
+}
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String     @db.VarChar(200)
+  description String?
+  status      TaskStatus @default(PENDING)
+  priority    Priority   @default(MEDIUM)
+  dueDate     DateTime
+  completedAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  projectId   Int
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdById String     @db.Uuid
+  createdBy   User       @relation("TaskCreator", fields: [createdById], references: [id])
+  assigneeId  String     @db.Uuid
+  assignee    User       @relation("TaskAssignee", fields: [assigneeId], references: [id])
+}
+
+model AppSecurityConfig {
+  id                 Int      @id @default(1)
+  globalTokenVersion Int      @default(1)
+  updatedAt          DateTime @updatedAt
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Role {
+  SUPER_ADMIN
+  MANAGER
+  EMPLOYEE
+}

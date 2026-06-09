@@ -1,0 +1,71 @@
+---
+import type { Link } from "@/constants/adminLinks";
+
+import ButtonNavLink from "./ButtonNavLink.astro";
+import NavigationLink from "./NavigationLink.astro";
+import ChildrenLinks from "./ChildrenLinks.astro";
+
+interface Props {
+  link: Link;
+}
+
+const { link } = Astro.props;
+const { hasChildren, icon, name, subMenu, href } = link;
+---
+
+<li class="border-b border-b-purple-300 dark:border-slate-700">
+  {
+    hasChildren ? (
+      <ButtonNavLink hasChildren={hasChildren} name={name}  />
+    ) : (
+      <NavigationLink
+        hasChildren={hasChildren}
+        name={name}
+        href={href}
+        icon={icon}
+      />
+    )
+  }
+  {
+    hasChildren && (
+      <ul class="pl-6 max-h-0 overflow-hidden transition-all flex flex-col gap-1">
+        {subMenu?.map((sub) => (
+          <ChildrenLinks subMenu={sub} />
+        ))}
+      </ul>
+    )
+  }
+</li>
+
+<!-- <script>
+  function activeButton() {
+    const buttons: NodeListOf<HTMLButtonElement> =
+      document.querySelectorAll("button");
+    buttons.forEach((button) => {
+      button.addEventListener("click", (evt) => {
+        const targetButton = evt.target as HTMLElement;
+
+        console.log(targetButton);
+        
+
+        const btn = targetButton.closest("button") as HTMLButtonElement;
+        buttons.forEach((button) => {
+          if (!btn.getAttribute("target")) {
+            button.classList.remove("bg-blue-400", "text-gray-100");
+            button.removeAttribute("target");
+          }
+        });
+
+        if (btn.classList.contains("bg-blue-400")) {
+          btn.removeAttribute("target");
+        } else {
+          btn.setAttribute("target", "true");
+        }
+
+        btn.classList.toggle("bg-blue-400");
+        btn.classList.toggle("text-gray-100");
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", activeButton);
+</script> -->

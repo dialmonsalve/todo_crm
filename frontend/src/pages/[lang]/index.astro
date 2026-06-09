@@ -1,0 +1,24 @@
+---
+import Accordion from "@/components/Accordion.astro";
+import DropZone from "@/components/DropZone.astro";
+import Tabs from "@/components/Tabs.astro";
+import MainLayout from "@/layouts/MainLayout.astro";
+
+const items = [
+  { label: "Página", id: 1 },
+  { label: "Imágenes", id: 2 },
+  { label: "Imágenes almacenadas", id: 3 },
+];
+---
+
+<MainLayout>
+  <h1>Hello Astro</h1>
+  <Tabs items={items} title="Ejemplo" className="">
+    <div id="tab-1" class="h-50 tab-content hidden border border-blue-700"></div>
+    <div id="tab-2" class="h-50 tab-content hidden border border-red-700"></div>
+		<div id="tab-3" class="h-50 tab-content hidden border border-yellow-700"></div>
+  </Tabs>
+	<DropZone  id="hola" height={600} width={800} />
+
+  <Accordion />
+</MainLayout>

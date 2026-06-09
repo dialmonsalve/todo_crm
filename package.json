@@ -1,0 +1,14 @@
+{
+"name": "todo-crm-root",
+  "private": true,
+  "scripts": {
+    "install:all": "pnpm install",
+    "dev:all": "pnpm -r --parallel dev",
+    "build:all": "pnpm -r run build",
+    "front": "pnpm --filter frontend dev",
+    "back": "pnpm --filter backend start:dev"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3"
+  }
+}

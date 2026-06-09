@@ -1,0 +1,7 @@
+{
+  "INVALID_SORT_FIELD": "Valid fields to sort: '[{validFields}]'",
+  "INVALID_SORT_ORDER": "You can order by '[asc or desc]' ",
+  "NOT_VALID_CONFIG": "Invalid configuration",
+  "INVALID_ENTITY_TYPE": "Entity type is invalid Allowed: {entity}",
+  "INVALID_ENUM_ARRAY": "Each value must be one of: {args.validTypes}"
+}

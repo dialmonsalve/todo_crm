@@ -1,0 +1,37 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+
+const files = import.meta.glob<string>('../icons/**/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+const filepath = `../icons/${name}.svg`;
+const svgContent = files[filepath];
+
+if (!svgContent) {
+  console.error(`[Icon] El icono "${name}" no se encontró en src/icons/`);
+}
+---
+
+{
+  svgContent ? (
+    <span class={className} set:html={svgContent} />
+  ) : (
+    <span class="text-red-500 text-xs">Icon not found</span>
+  )
+}
+
+<style is:global>
+  span svg {
+    fill: none;
+    width:inherit;
+    height:inherit
+  }
+</style>

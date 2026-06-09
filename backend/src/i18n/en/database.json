@@ -1,0 +1,15 @@
+{
+  "VALUE_TOO_LONG": "The value for '{target}' is too long for storage.",
+  "NULL_VIOLATION": "The field '{target}' cannot be empty.",
+  "RELATION_CONSTRAINT": "Cannot delete or change the {field} because other records depend on it.",
+  "UNKNOWN_ERROR": "An unexpected database error occurred.",
+  "UNIQUE_CONSTRAINT": "The value for the field '{target}' is already in use.",
+  "FOREIGN_KEY_FAIL": "Operation failed: The provided {field} does not exist in the system.",
+  "NOT_FOUND": "The requested record was not found in our database.",
+  "CONNECTION_ERROR": "Database server connection error.",
+  "fields": {
+    "username": "username",
+    "email": "email",
+    "roleId": "role"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "PROFILE_REQUIRED": "El perfil es requerido",
+  "PROFILE_EMPTY": "El perfil no puede estar vacío",
+  "NAME_STRING": "El nombre debe ser una cadena de texto.",
+  "NAME_SHORT": "El nombre es muy corto. Mínimo {constraints.0} caracteres.",
+  "NAME_LONG": "El nombre debe tener entre 3 y máximo {constraints.0} caracteres.",
+  "LAST_NAME_STRING": "El apellido debe ser una cadena de texto.",
+  "LAST_NAME_SHORT": "El apellido es muy corto. Mínimo {constraints.0} caracteres.",
+  "LAST_NAME_LONG": "El apellido es muy largo. Máximo {constraints.0} caracteres.",
+  "PHONE_STRING": "El teléfono debe ser una cadena de texto.",
+  "PHONE_SHORT": "El teléfono debe tener al menos {constraints.0} dígitos.",
+  "ADDRESS_STRING": "La dirección debe ser una cadena de texto.",
+  "ADDRESS_LONG": "La dirección es muy larga. Máximo {constraints.0} caracteres.",
+  "AVATAR_STRING": "El avatar debe ser una cadena de texto (URL o nombre de archivo)."
+}

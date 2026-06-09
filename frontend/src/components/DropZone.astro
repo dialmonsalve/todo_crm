@@ -1,0 +1,67 @@
+---
+import Icon from "@/icons/Icon.astro";
+
+interface Props {
+  width: number;
+  height: number;
+  multiple?: boolean;
+  className?: string;
+  name?: string;
+  id: string;
+  value?: {
+    order?: number;
+    link: string;
+  }[];
+}
+
+const { width, height, id, className, name, value, multiple } =
+  Astro.props;
+
+const text = multiple ? "las imágenes" : "la imagen";
+
+---
+
+<dial-drop-zone
+  data-width={width}
+  data-height={height}
+  id={id}
+  name={name}
+  value={JSON.stringify(value)}
+>
+  <div
+    class:list={[
+      "flex flex-col gap-2 min-w-full items-center relative h-130 max-h-130 overflow-auto",
+    ]}
+    id="parent-single-drop-zone"
+  >
+    <label
+      for={`${id}-file-upload`}
+      class:list={[
+        "flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-blue-800 w-65/100 single-drop-zone",
+        className,
+      ]}
+      id="label-drop-zone"
+    >
+      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+        <Icon name="upload" class="text-gray-300 w-10" />
+        <p class="mb-2 text-sm text-gray-500">
+          <span class="font-semibold">Click aquí </span> o arrastre {text}
+        </p>
+        <p class="text-xs text-gray-500">WEBP, PNG, JPG or JPEG</p>
+      </div>
+      <input
+        id={`${id}-file-upload`}
+        name="imageFiles"
+        type="file"
+        accept="image/*"
+        class="hidden"
+        {multiple}
+      />
+    </label>
+  </div>
+</dial-drop-zone>
+
+
+
+<script src="@/web-components/drop-zone"></script>
+<script src="@/web-components/ejemplo"></script>
