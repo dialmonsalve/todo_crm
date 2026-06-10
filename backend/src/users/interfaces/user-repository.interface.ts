@@ -1,5 +1,5 @@
 import type { PaginatedResult } from '@cPaginate/interface';
-import type { IUserResponseDto } from './user-response-dto.interface';
+import type { IUserResponseDto } from './user-response.interface';
 import type { PaginationUserDto } from '../dto/pagination-user.dto';
 import type { Prisma } from '@generated-prisma/client';
 

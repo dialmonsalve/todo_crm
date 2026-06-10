@@ -1,0 +1,12 @@
+{
+  "NAME_STRING": "Customer name must be a valid text string",
+  "NAME_MIN_LENGTH": "Customer name must be at least {constraints.0} characters",
+  "NAME_MAX_LENGTH": "Customer name must be at most {constraints.0} characters",
+  "COMPANY_MIN_LENGTH": "Company name must be at least {constraints.0} characters",
+  "COMPANY_MAX_LENGTH": "Company name must be at most {constraints.0} characters",
+  "EMAIL_STRING": "Email address must be a valid text string",
+  "EMAIL_MIN_LENGTH": "Email address must be at least {constraints.0} characters",
+  "EMAIL": "Email address is invalid",
+  "PHONE_MIN_LENGTH": "Customer phone number must be at least {constraints.0} characters",
+  "PHONE_MAX_LENGTH": "The customer's phone number must have a maximum of {constraints.0} characters"
+}

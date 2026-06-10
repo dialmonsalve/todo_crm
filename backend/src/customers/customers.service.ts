@@ -1,26 +1,64 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { CustomerTranslationHandler } from './translation/customer-translation.handler';
+
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { PaginationCustomerDto } from './dto/pagination-customer.dto';
+
+import type { ICustomerRepository, ICustomerResponseDto } from './interfaces';
+import type { ApiResponse } from '@cInterfaces/api-response.interface';
+import type { PaginatedResult } from '@cPaginate/interface';
 
 @Injectable()
 export class CustomersService {
-  create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+  constructor(
+    @Inject('ICustomerRepository')
+    private readonly customerRepository: ICustomerRepository,
+    protected readonly tr: CustomerTranslationHandler
+  ) {}
+  async create(createCustomerDto: CreateCustomerDto): Promise<ApiResponse> {
+    const name = await this.customerRepository.create(createCustomerDto);
+    return {
+      message: this.tr.create(name),
+      statusCode: 201,
+      error: null,
+    };
   }
 
-  findAll() {
-    return `This action returns all customers`;
+  findAll(
+    paginationDto: PaginationCustomerDto
+  ): Promise<PaginatedResult<ICustomerResponseDto>> {
+    return this.customerRepository.findAll(paginationDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async findOne(id: number): Promise<ICustomerResponseDto> {
+    const customer = await this.customerRepository.findById(id);
+    if (!customer)
+      throw new NotFoundException([this.tr.general('database.NOT_FOUND')]);
+
+    return customer;
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(
+    id: number,
+    updateCustomerDto: UpdateCustomerDto
+  ): Promise<ApiResponse> {
+    const name = await this.customerRepository.update(id, updateCustomerDto);
+
+    return {
+      message: this.tr.update(name),
+      statusCode: 200,
+      error: null,
+    };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async toggleActive(id: number): Promise<ApiResponse> {
+    const { name, isActive } = await this.customerRepository.toggleActive(id);
+
+    return {
+      message: this.tr.toggle(name, isActive),
+      statusCode: 200,
+      error: null,
+    };
   }
 }

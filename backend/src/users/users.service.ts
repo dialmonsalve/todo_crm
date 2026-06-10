@@ -1,11 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { PaginationUserDto } from './dto/pagination-user.dto';
 import { UserTranslationHandler } from './translation/user-translation.handler';
 import { EncryptionService } from '@cServices/encryption.service';
-import { UpdateUserDto } from './dto/update-user.dto';
 
-import type { PaginationUserDto } from './dto/pagination-user.dto';
 import type { IUserRepository, IUserResponseDto } from './interfaces';
 import type { PaginatedResult } from '@cPaginate/interface';
 import type { Prisma } from '@generated-prisma/client';
@@ -50,7 +50,7 @@ export class UsersService {
     };
   }
 
-  async findAll(
+  findAll(
     paginationDto: PaginationUserDto
   ): Promise<PaginatedResult<IUserResponseDto>> {
     return this.userRepository.findAll(paginationDto);

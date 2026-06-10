@@ -1,0 +1,12 @@
+{
+  "NAME_STRING": "El nombre del cliente debe ser una cadena de texto válida",
+  "NAME_MIN_LENGTH": "El nombre del cliente debe tener al menos {constraints.0} caracteres",
+  "NAME_MAX_LENGTH": "El nombre del cliente debe tener máximo {constraints.0} caracteres",
+  "COMPANY_MIN_LENGTH": "El nombre de la compañía debe tener al menos {constraints.0} caracteres",
+  "COMPANY_MAX_LENGTH": "El nombre de la compañía debe tener máximo {constraints.0} caracteres",
+  "EMAIL_STRING": "El correo electrónico debe ser una cadena de texto válida",
+  "EMAIL_MIN_LENGTH": "El correo electrónico debe tener al menos {constraints.0} caracteres",
+  "EMAIL": "El correo electrónico no es válido",
+  "PHONE_MIN_LENGTH": "El teléfono del cliente debe tener al menos {constraints.0} caracteres",
+  "PHONE_MAX_LENGTH": "El teléfono del cliente debe tener máximo {constraints.0} caracteres"
+}
