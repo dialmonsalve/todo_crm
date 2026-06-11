@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import type { CreateUserDto } from '../dto/create-user.dto';
+import type { UpdateUserDto } from '../dto/update-user.dto';
 import { UserMapper } from '../mappers/user.mapper';
 import { PrismaService } from '@cDatabase/prisma.service';
 import { PaginationHelper } from '@cPaginate/pagination.helper';
@@ -10,26 +12,63 @@ import type {
   IUserRepository,
   IUserResponseDto,
 } from '../interfaces';
-import type { Prisma } from '@generated-prisma/client';
+
 import type { PaginatedResult } from '@cPaginate/interface';
+import type { Prisma } from '@generated-prisma/client';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: Prisma.UserCreateInput): Promise<string> {
+  async create(data: CreateUserDto, createdById: string): Promise<string> {
+    const { profile, password, ...userData } = data;
+
     const user = await this.prisma.user.create({
-      data,
+      data: {
+        ...userData,
+        email: userData.email.toLocaleLowerCase(),
+        password,
+        role: data.role,
+        createdBy: { connect: { id: createdById } },
+        updatedBy: { connect: { id: createdById } },
+        profile: {
+          create: {
+            ...profile,
+            name: profile.name.toLocaleLowerCase(),
+            lastName: profile.name.toLocaleLowerCase(),
+          },
+        },
+      },
       include: { profile: true },
     });
     const name = `${user.profile?.name} ${user.profile?.lastName}`;
     return name;
   }
 
-  async update(id: string, data: Prisma.UserUpdateInput): Promise<string> {
+  async update(
+    id: string,
+    data: UpdateUserDto,
+    updatedById: string
+  ): Promise<string> {
+    const { profile } = data;
+
     const user = await this.prisma.user.update({
       where: { id },
-      data,
+      data: {
+        ...data,
+        updatedById,
+        profile: {
+          update: {
+            ...profile,
+            ...(profile !== undefined && {
+              name: profile.name.toLocaleLowerCase(),
+            }),
+            ...(profile !== undefined && {
+              lastName: profile.lastName.toLocaleLowerCase(),
+            }),
+          },
+        },
+      },
       include: { profile: true },
     });
 
@@ -132,7 +171,7 @@ export class UserRepository implements IUserRepository {
       include: {
         profile: true,
       },
-    });   
+    });
 
     if (!user) return null;
 

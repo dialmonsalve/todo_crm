@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateCustomerDto } from '../dto/create-customer.dto';
+import { UpdateCustomerDto } from '../dto/update-customer.dto';
 import { CustomerMapper } from '../mappers/customer.mapper';
 import { PrismaService } from '@cDatabase/prisma.service';
 import { PaginationHelper } from '@cPaginate/pagination.helper';
@@ -17,17 +19,27 @@ import type { PaginatedResult } from '@cPaginate/interface';
 export class CustomerRepository implements ICustomerRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: Prisma.CustomerCreateInput): Promise<string> {
+  async create(data: CreateCustomerDto): Promise<string> {
     const customer = await this.prisma.customer.create({
-      data,
+      data: {
+        ...data,
+        name: data.name.toLocaleLowerCase(),
+        company: data.company?.toLocaleLowerCase(),
+        email: data.email.toLocaleLowerCase(),
+      },
     });
     return customer.name;
   }
 
-  async update(id: number, data: Prisma.CustomerUpdateInput): Promise<string> {
+  async update(id: number, data: UpdateCustomerDto): Promise<string> {
     const customer = await this.prisma.customer.update({
       where: { id },
-      data,
+      data: {
+        ...data,
+        name: data.name?.toLocaleLowerCase(),
+        company: data.company?.toLocaleLowerCase(),
+        email: data.email?.toLocaleLowerCase(),
+      },
     });
 
     return customer.name;

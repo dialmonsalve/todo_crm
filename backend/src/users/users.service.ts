@@ -8,7 +8,6 @@ import { EncryptionService } from '@cServices/encryption.service';
 
 import type { IUserRepository, IUserResponseDto } from './interfaces';
 import type { PaginatedResult } from '@cPaginate/interface';
-import type { Prisma } from '@generated-prisma/client';
 import type { ApiResponse } from '@cInterfaces/api-response.interface';
 
 @Injectable()
@@ -24,24 +23,12 @@ export class UsersService {
     createUserDto: CreateUserDto,
     createdById: string
   ): Promise<ApiResponse> {
-    const { profile, password, ...userData } = createUserDto;
-    const data: Prisma.UserCreateInput = {
-      ...userData,
-      email: userData.email.toLocaleLowerCase(),
-      password: this.encryptionService.hash(password),
-      role: createUserDto.role,
-      createdBy: { connect: { id: createdById } },
-      updatedBy: { connect: { id: createdById } },
-      profile: {
-        create: {
-          ...profile,
-          name: profile.name.toLocaleLowerCase(),
-          lastName: profile.name.toLocaleLowerCase(),
-        },
-      },
+    const data = {
+      ...createUserDto,
+      password: this.encryptionService.hash(createUserDto.password),
     };
 
-    const name = await this.userRepository.create(data);
+    const name = await this.userRepository.create(data, createdById);
 
     return {
       message: this.tr.create(name),
@@ -77,16 +64,11 @@ export class UsersService {
     updateUserDto: UpdateUserDto,
     updatedById: string
   ): Promise<ApiResponse> {
-    const { profile } = updateUserDto;
-    const data = {
-      ...updateUserDto,
-      updatedById,
-      profile: {
-        update: profile,
-      },
-    };
-
-    const name = await this.userRepository.update(id, data);
+    const name = await this.userRepository.update(
+      id,
+      updateUserDto,
+      updatedById
+    );
 
     return {
       message: this.tr.update(name),

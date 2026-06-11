@@ -1,7 +1,8 @@
+import type { CreateUserDto } from '../dto/create-user.dto';
+import type { UpdateUserDto } from '../dto/update-user.dto';
 import type { PaginatedResult } from '@cPaginate/interface';
 import type { IUserResponseDto } from './user-response.interface';
 import type { PaginationUserDto } from '../dto/pagination-user.dto';
-import type { Prisma } from '@generated-prisma/client';
 
 export interface IUserRepository {
   findAll(
@@ -11,8 +12,12 @@ export interface IUserRepository {
 
   findByUsername(username: string): Promise<IUserResponseDto | null>;
 
-  create(data: Prisma.UserCreateInput): Promise<string>;
-  update(id: string, data: Prisma.UserUpdateInput): Promise<string>;
+  create(data: CreateUserDto, createdById: string): Promise<string>;
+  update(
+    id: string,
+    data: UpdateUserDto,
+    updatedById: string
+  ): Promise<string>;
 
   toggleActive(
     id: string,
