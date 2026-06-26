@@ -4,7 +4,7 @@ export class Customer implements PrismaCustomer {
   company!: string | null;
   createdAt!: Date;
   email!: string;
-  id!: number;
+  id!: string;
   isActive!: boolean;
   name!: string;
   phone!: string | null;

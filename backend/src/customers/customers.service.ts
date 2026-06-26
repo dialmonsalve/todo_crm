@@ -53,7 +53,15 @@ export class CustomersService {
   }
 
   async toggleActive(id: number): Promise<ApiResponse> {
-    const { name, isActive } = await this.customerRepository.toggleActive(id);
+    const currentCustomer =
+      await this.customerRepository.findUniqueWithState(id);
+    if (!currentCustomer)
+      throw new NotFoundException([this.tr.general('database.NOT_FOUND')]);
+
+    const { name, isActive } = await this.customerRepository.toggleActive(
+      id,
+      !currentCustomer.isActive
+    );
 
     return {
       message: this.tr.toggle(name, isActive),

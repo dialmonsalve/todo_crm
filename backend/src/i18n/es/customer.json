@@ -8,5 +8,9 @@
   "EMAIL_MIN_LENGTH": "El correo electrónico debe tener al menos {constraints.0} caracteres",
   "EMAIL": "El correo electrónico no es válido",
   "PHONE_MIN_LENGTH": "El teléfono del cliente debe tener al menos {constraints.0} caracteres",
-  "PHONE_MAX_LENGTH": "El teléfono del cliente debe tener máximo {constraints.0} caracteres"
+  "PHONE_MAX_LENGTH": "El teléfono del cliente debe tener máximo {constraints.0} caracteres",
+  "CREATED": "El usuario {name} ha sido creado",
+  "UPDATED": "El usuario {name} ha sido actualizado",
+  "ACTIVATED": "El usuario {name} ha sido activado",
+  "DEACTIVATED": "El usuario {name} ha sido desactivado"
 }

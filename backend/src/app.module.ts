@@ -22,6 +22,8 @@ import { TokenRefreshInterceptor } from './auth/interceptors/token-refresh.inter
 import { envs } from './config/envs';
 import { RestoreUsersModule } from './restore-users/restore-users.module';
 import { CustomersModule } from './customers/customers.module';
+import { ProjectsModule } from './projects/projects.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { CustomersModule } from './customers/customers.module';
     AuthModule,
     RestoreUsersModule,
     CustomersModule,
+    ProjectsModule,
+    TasksModule,
   ],
   controllers: [],
   providers: [

@@ -78,8 +78,14 @@ export class UsersService {
   }
 
   async toggleActive(id: string, updatedById: string): Promise<ApiResponse> {
+    const currentUser = await this.userRepository.findUniqueWithState(id);
+
+    if (!currentUser)
+      throw new NotFoundException([this.tr.general('database.NOT_FOUND')]);
+
     const { name, isActive } = await this.userRepository.toggleActive(
       id,
+      !currentUser.isActive,
       updatedById
     );
 

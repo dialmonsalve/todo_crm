@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@nestjs/mapped-types": "*"
+  },
 "name": "todo-crm-root",
   "private": true,
   "scripts": {

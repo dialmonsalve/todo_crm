@@ -8,19 +8,20 @@ export interface IUserRepository {
   findAll(
     paginationDto: PaginationUserDto
   ): Promise<PaginatedResult<IUserResponseDto>>;
+
   findById(id: string): Promise<IUserResponseDto | null>;
 
   findByUsername(username: string): Promise<IUserResponseDto | null>;
 
+  findUniqueWithState(id: string): Promise<{ isActive: boolean } | null>;
+
   create(data: CreateUserDto, createdById: string): Promise<string>;
-  update(
-    id: string,
-    data: UpdateUserDto,
-    updatedById: string
-  ): Promise<string>;
+
+  update(id: string, data: UpdateUserDto, updatedById: string): Promise<string>;
 
   toggleActive(
     id: string,
+    isActive: boolean,
     updatedById: string
   ): Promise<{ name: string; isActive: boolean }>;
 }

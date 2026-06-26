@@ -52,7 +52,7 @@ model Profile {
 }
 
 model Customer {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid()) @db.Uuid
   name      String    @db.VarChar(150)
   company   String?   @db.VarChar(150)
   email     String    @unique
@@ -69,7 +69,7 @@ model Project {
   description String?
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
-  clientId    Int
+  clientId    String              @unique @db.Uuid
   client      Customer            @relation(fields: [clientId], references: [id], onDelete: Cascade)
   tasks       Task[]
   team        ProjectAssignment[]

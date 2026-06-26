@@ -45,22 +45,34 @@ export class CustomerRepository implements ICustomerRepository {
     return customer.name;
   }
 
-  async toggleActive(id: number): Promise<{ name: string; isActive: boolean }> {
-    const currentUser = await this.prisma.customer.findUnique({
+  async toggleActive(
+    id: number,
+    isActive: boolean
+  ): Promise<{ name: string; isActive: boolean }> {
+    const updatedCustomer = await this.prisma.customer.update({
+      where: { id },
+      data: {
+        isActive: isActive,
+      },
+      select: { isActive: true, name: true },
+    });
+  
+    return {
+      name: updatedCustomer.name,
+      isActive: updatedCustomer.isActive,
+    };
+  }
+
+  async findUniqueWithState(id: number): Promise<{ isActive: boolean } | null> {
+    const user = await this.prisma.customer.findUnique({
       where: { id },
       select: { isActive: true },
     });
 
-    const updatedCustomer = await this.prisma.customer.update({
-      where: { id },
-      data: {
-        isActive: !currentUser?.isActive,
-      },
-      select: { isActive: true, name: true },
-    });
+    if (!user) return null;
+
     return {
-      name: updatedCustomer.name,
-      isActive: updatedCustomer.isActive,
+      isActive: user.isActive,
     };
   }
 

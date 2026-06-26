@@ -8,5 +8,9 @@
   "EMAIL_MIN_LENGTH": "Email address must be at least {constraints.0} characters",
   "EMAIL": "Email address is invalid",
   "PHONE_MIN_LENGTH": "Customer phone number must be at least {constraints.0} characters",
-  "PHONE_MAX_LENGTH": "The customer's phone number must have a maximum of {constraints.0} characters"
+  "PHONE_MAX_LENGTH": "The customer's phone number must have a maximum of {constraints.0} characters",
+  "CREATED": "user {name} has been created",
+  "UPDATED": "user {name} has been updated",
+  "ACTIVATED": "user {name} has been activated",
+  "DEACTIVATED": "user {name} has been deactivated"
 }

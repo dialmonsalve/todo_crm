@@ -11,9 +11,14 @@ export interface ICustomerRepository {
 
   findById(id: number): Promise<ICustomerResponseDto | null>;
 
+  findUniqueWithState(id: number): Promise<{ isActive: boolean } | null>
+
   create(data: CreateCustomerDto): Promise<string>;
 
   update(id: number, data: UpdateCustomerDto): Promise<string>;
 
-  toggleActive(id: number): Promise<{ name: string; isActive: boolean }>;
+  toggleActive(
+    id: number,
+    isActive: boolean
+  ): Promise<{ name: string; isActive: boolean }>;
 }

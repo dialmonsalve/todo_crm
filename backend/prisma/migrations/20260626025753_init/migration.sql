@@ -43,7 +43,7 @@ CREATE TABLE "Profile" (
 
 -- CreateTable
 CREATE TABLE "Customer" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL,
     "name" VARCHAR(150) NOT NULL,
     "company" VARCHAR(150),
     "email" TEXT NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE "Project" (
     "description" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "clientId" INTEGER NOT NULL,
+    "clientId" UUID NOT NULL,
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
 );
@@ -114,6 +114,9 @@ CREATE UNIQUE INDEX "Profile_userId_key" ON "Profile"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Customer_email_key" ON "Customer"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Project_clientId_key" ON "Project"("clientId");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

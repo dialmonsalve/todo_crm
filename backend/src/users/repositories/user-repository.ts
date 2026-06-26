@@ -75,19 +75,28 @@ export class UserRepository implements IUserRepository {
     return `${user.profile?.name} ${user.profile?.lastName}`;
   }
 
-  async toggleActive(
-    id: string,
-    updatedById: string
-  ): Promise<{ name: string; isActive: boolean }> {
-    const currentUser = await this.prisma.user.findUnique({
+  async findUniqueWithState(id: string): Promise<{ isActive: boolean } | null> {
+    const user = await this.prisma.user.findUnique({
       where: { id },
       select: { isActive: true },
     });
 
+    if (!user) return null;
+  
+    return {
+      isActive: user.isActive,
+    };
+  }
+
+  async toggleActive(
+    id: string,
+    isActive:boolean,
+    updatedById: string
+  ): Promise<{ name: string; isActive: boolean }> {
     const updatedUser = await this.prisma.user.update({
       where: { id },
       data: {
-        isActive: !currentUser?.isActive,
+        isActive,
         updatedById,
       },
       select: { isActive: true, profile: true },
